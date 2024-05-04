@@ -17,35 +17,35 @@ namespace Demo.MauiApiConsumer
 
         private async void btnAdd_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AddEditProduct(_apiClient, null));
+            await Navigation.PushModalAsync(new AddEditCulturalEvent(_apiClient, null));
         }
 
-        private async void btnShowProducts_Clicked(object sender, EventArgs e)
+        private async void btnShowCulturalEvents_Clicked(object sender, EventArgs e)
         {
-            await LoadProducts();
+            await LoadCulturalEvents();
         }
 
-        private async void productListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void culturalEventListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var product = (Product)e.Item;
+            var culturalEvent = (CulturalEvent)e.Item;
             var action = await DisplayActionSheet("Action", "Cancel", null, "Edit", "Delete");
 
             switch(action)
             {
                 case "Edit":
-                    await Navigation.PushModalAsync(new AddEditProduct(_apiClient, product));
+                    await Navigation.PushModalAsync(new AddEditCulturalEvent(_apiClient, culturalEvent));
                     break;
                 case "Delete":
-                    await _apiClient.DeleteProduct(product.Id);
-                    await LoadProducts();
+                    await _apiClient.DeleteCulturalEvent(culturalEvent.Id);
+                    await LoadCulturalEvents();
                     break;
             }
         }
 
-        private async Task LoadProducts()
+        private async Task LoadCulturalEvents()
         {
-            var products = await _apiClient.GetProducts();
-            productListView.ItemsSource = products;
+            var culturalEvents = await _apiClient.GetCulturalEvents();
+            culturalEventListView.ItemsSource = culturalEvents;
         }
     }
 }

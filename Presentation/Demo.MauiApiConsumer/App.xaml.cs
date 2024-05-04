@@ -5,6 +5,7 @@
         public App(MainPage mainPage)
         {
             InitializeComponent();
+            
 
             MainPage = mainPage;
         }

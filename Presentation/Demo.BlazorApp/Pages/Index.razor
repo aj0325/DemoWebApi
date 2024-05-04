@@ -8,40 +8,44 @@
         <table class="table table-striped mb-0">
             <thead>
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Price</th>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Signed Up</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <input @bind="addProductModel.ProductCode" class="form-control" placeholder="Code" />
+                        <input @bind="addCulturalEventModel.Name" class="form-control" placeholder="Event Name" />
                     </td>
                     <td>
-                        <input @bind="addProductModel.ProductName" class="form-control" placeholder="Name" />
+                        <input @bind="addCulturalEventModel.Date" type="date" class="form-control" />
                     </td>
                     <td>
-                        <input @bind="addProductModel.Price" class="form-control" placeholder="Price" />
+                        <input @bind="addCulturalEventModel.Description" class="form-control" placeholder="Description" />
                     </td>
                     <td>
-                        <a @onclick="AddProduct" href="javascript:void(0)">Save</a>
+                        <input @bind="addCulturalEventModel.SignedUp" type="checkbox" class="form-check-input" />
+                    </td>
+                    <td>
+                        <a @onclick="AddCulturalEvent" href="javascript:void(0)">Save</a>
                     </td>
                 </tr>
-                @if (products?.Any() ?? false)
+                @if (culturalEvents?.Any() ?? false)
                 {
-                    @foreach (var product in products)
+                    @foreach (var culturalEvent in culturalEvents)
                     {
-                        <ProductRowItemComponent ProductRowItem="product"
-                                                 OnEdit="EditProduct"
-                                                 OnDelete="DeleteProduct" />
+                        <CulturalEventRowItemComponent CulturalEventRowItem="culturalEvent"
+                                                 OnEdit="EditCulturalEvent"
+                                                 OnDelete="DeleteCulturalEvent" />
                     }
                 }
                 else
                 {
                     <tr>
-                        <td class="text-center" colspan="3">- No Products -</td>
+                        <td class="text-center" colspan="5">- No Cultural Events -</td>
                     </tr>
                 }
             </tbody>
@@ -49,37 +53,37 @@
     </div>
 </div>
 
-@code{
-    private List<Product>? products;
-    private Product addProductModel = new();
+@code {
+    private List<CulturalEvent>? culturalEvents;
+    private CulturalEvent addCulturalEventModel = new();
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await LoadProducts();
+        await LoadCulturalEvents();
     }
 
-    private async Task LoadProducts()
+    private async Task LoadCulturalEvents()
     {
-        products = await apiClient.GetProducts();
+        culturalEvents = await apiClient.GetCulturalEvents();
     }
 
-    private async Task AddProduct()
+    private async Task AddCulturalEvent()
     {
-        await apiClient.SaveProduct(addProductModel);
-        await LoadProducts();
-        addProductModel = new();
+        await apiClient.SaveCulturalEvent(addCulturalEventModel);
+        await LoadCulturalEvents();
+        addCulturalEventModel = new();
     }
 
-    private async Task EditProduct(Product product)
+    private async Task EditCulturalEvent(CulturalEvent culturalEvent)
     {
-        await apiClient.UpdateProduct(product);
-        await LoadProducts();
+        await apiClient.UpdateCulturalEvent(culturalEvent);
+        await LoadCulturalEvents();
     }
 
-    private async Task DeleteProduct(int id)
+    private async Task DeleteCulturalEvent(int id)
     {
-        await apiClient.DeleteProduct(id);
-        await LoadProducts();
+        await apiClient.DeleteCulturalEvent(id);
+        await LoadCulturalEvents();
     }
 }

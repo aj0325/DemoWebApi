@@ -57,7 +57,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\AddEditProduct.xaml">
+	  <Compile Update="Pages\AddEditCulturalEvent.xaml.cs">
+	    <DependentUpon>AddEditCulturalEvent.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\AddEditCulturalEvent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

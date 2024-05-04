@@ -17,29 +17,29 @@ namespace Demo.ApiClient
             _httpClient.BaseAddress = new System.Uri(apiClientOptions.ApiBaseAddress);
         }
 
-        public async Task<List<Product>?> GetProducts()
+        public async Task<List<CulturalEvent>?> GetCulturalEvents()
         {
-            return await _httpClient.GetFromJsonAsync<List<Product>?>("/api/Product");
+            return await _httpClient.GetFromJsonAsync<List<CulturalEvent>?>("/api/CulturalEvent");
         }
 
-        public async Task<Product?> GetById(int id)
+        public async Task<CulturalEvent?> GetById(int id)
         {
-            return await _httpClient.GetFromJsonAsync<Product?>($"/api/Product/{id}");
+            return await _httpClient.GetFromJsonAsync<CulturalEvent?>($"/api/CulturalEvent/{id}");
         }
 
-        public async Task SaveProduct(Product product)
+        public async Task SaveCulturalEvent(CulturalEvent culturalEvent)
         {
-            await _httpClient.PostAsJsonAsync("/api/Product", product);
+            await _httpClient.PostAsJsonAsync("/api/CulturalEvent", culturalEvent);
         }
 
-        public async Task UpdateProduct(Product product)
+        public async Task UpdateCulturalEvent(CulturalEvent culturalEvent)
         {
-            await _httpClient.PutAsJsonAsync("/api/Product", product);
+            await _httpClient.PutAsJsonAsync("/api/CulturalEvent", culturalEvent);
         }
 
-        public async Task DeleteProduct(int id)
+        public async Task DeleteCulturalEvent(int id)
         {
-            await _httpClient.DeleteAsync($"/api/Product/{id}");
+            await _httpClient.DeleteAsync($"/api/CulturalEvent/{id}");
         }
     }
 }

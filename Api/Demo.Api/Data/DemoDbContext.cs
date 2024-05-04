@@ -10,5 +10,5 @@ public class DemoDbContext : DbContext
         
     }
 
-    public DbSet<Product> Products { get; set; }
+    public DbSet<CulturalEvent> CulturalEvents { get; set; }
 }
